@@ -11,14 +11,14 @@ class GamesController < ApplicationController
     @word = params[:word]
     url = "https://wagon-dictionary.herokuapp.com/#{@word}"
     response = JSON.parse(open(url).read)
-        if countdown(@word)
+        if countdown?(@word)
           @message = "words not included"
           if response['found']
             @message = "Congratulations! #{@word} is an english word"
           else @message = "Sorry, #{@word} is not an english word"
           end
         else
-          @message = "Sorry not included"
+          @message = "Sorry #{@word} is not included in the string"
         end
     end
 
